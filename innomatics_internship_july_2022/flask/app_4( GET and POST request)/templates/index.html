@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>This is the home page!</h1>
+    <h2>Welcome to the home page</h2>
+    <form action  method = 'post'>
+        <!-- since no action is defiend it will remain on same page and same route will be used and check if the route '/' is defined in the routes.php file
+             and we have defined a post req as method -->
+        <label>E-mail/Username: </label>
+        <input type = "text" name = 'in_1'> <br>
+        <label>Password: </label>
+        <input type = 'password' name = 'in_2'> <br>
+         <!-- we need to change the type of txt box to password to make it disappear not text type -->
+        <input type = 'submit' value = 'Login'><br><br><br>
+        <!-- we can also use <button>Login</button> -->
+    </form>
+    <form action="{{ url_for('search_function') }}">
+        <label>Enter something to Search</label>
+        <input type="text" name="q"><br>
+        <button>Search</button>
+    </form>
+
+</body>
+</html>
