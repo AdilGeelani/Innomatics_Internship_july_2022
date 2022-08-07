@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regex101 Clone Application</title>
+</head>
+<body>
+    <h1> Welcome to the Regex101 Clone web app</h1>
+    <p>
+        This is a clone of the <a href="https://regex101.com">Regex101</a> website.
+        It is a simple web app that allows you to test regular expressions.
+    </p>
+    <form action = "" method = "POST">
+
+        <label>Enter Regular Expression</label>
+        <input type="text" name="regex" placeholder="Enter your Pattern" value = "{{regex}}"><br><br>
+        <label>Enter Text</label>
+        <input type="text" name="text" placeholder="Enter your text" value="{{text}}"><br><br>
+        <button> Check </button><br><br><br>
+
+        {% if count == -1 %}
+        {% elif count > 0 %}
+        <p>
+            <h2> Match Found!</h2> <br><br>
+            <h3>Total Number of matches found: </h3> {{count}} <br>
+            <h3> Details : </h3><br>
+            {% for i in result %}
+                {{i}} <br><br>
+            {% endfor %}
+        {% else %}
+            <h2> Results : No Match Found!</h2><br>
+            <h3>Total number of matches are : </h3> {{count}}
+        {% endif %}
+        </p>    
+    </form>
+
+
+</body>
+</html>
