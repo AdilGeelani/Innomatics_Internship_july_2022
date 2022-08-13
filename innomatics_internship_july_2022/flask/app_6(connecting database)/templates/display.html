@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Display All
+{% endblock %}
+
+{% block content %}
+
+<h3> All the available Subji's at Subji mandi are :</h3>
+
+<ul>
+{% for sabji in sabjis %}
+
+    <li>{{ sabji }}</li>
+
+{% endfor %}
+</ul>
+
+{% endblock %}
