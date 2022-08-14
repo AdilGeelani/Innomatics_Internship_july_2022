@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+
+{% block content %}
+    <h1>Welcome to the URL Shortner Web App</h1>
+    <form method = "post">
+        <label><b>Enter an https:// URL :</b></label>
+        <input type="text" name="long_url" placeholder="https://example.com" size="50"><br><br>
+        <button>Shorten</button>
+    </form>
+{% endblock %}

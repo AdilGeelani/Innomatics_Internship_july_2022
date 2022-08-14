@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    History
+{% endblock %}
+
+
+{% block content %}
+    <h1>Welcome to the URL Shortner Web App</h1>
+    <h3> All the Url's you have Shortened :</h3>
+
+<ul>
+{% for url in all_urls %}
+
+    <li>{{ url }}</li>
+
+{% endfor %}
+</ul>
+    
+{% endblock %}
