@@ -18,5 +18,7 @@ button_1 = st.button("Submit Local Authority")
 if button_1:
 
     df_new = df.loc[(df['local_authority'] == local_auth)]
+    st.text("The pubs in this region are:")
+    st.dataframe(df_new)
     st.map(df_new)
 
