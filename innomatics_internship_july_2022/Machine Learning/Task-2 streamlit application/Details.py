@@ -31,7 +31,13 @@ for i in categorical:
     st.markdown("- " + i)
 
 # The bar plot of some of the column are:
-st.subheader("The bar plot of some of the column are:")
-st.bar_chart(df['cut'].value_counts())  
-st.bar_chart(df['clarity'].value_counts())  
-st.bar_chart(df['color'].value_counts())  
+
+option = st.selectbox(
+    "Select the count plot of categorical columns",
+    ("cut", "clarity", "color"))
+if option == "cut":
+    st.bar_chart(df['cut'].value_counts())  
+elif option == "clarity":
+    st.bar_chart(df['clarity'].value_counts())
+else:
+    st.bar_chart(df['color'].value_counts())
