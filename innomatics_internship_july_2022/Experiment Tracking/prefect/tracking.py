@@ -1,4 +1,3 @@
-from re import A
 from typing import Any, Dict, List
 import pandas as pd
 import mlflow
@@ -85,17 +84,18 @@ def find_best_model(X_train: pd.DataFrame, y_train: pd.Series, estimator: Any, p
 # Workflow
 
 @flow
-def my_flow(path:str):
+def my_flow(path:str = './data/diamonds.csv'):
+    
     mlflow.set_tracking_uri("sqlite:///mlflow.db")
     mlflow.set_experiment("Diamond Price prediction")
 
     # parameters
     TAGET_COL = 'price'
     TEST_DATA_RATIO = 0.2
-    data_path = path
+    DATA_PATH = path
     
     # load the data 
-    df = load_data(path = data_path)
+    df = load_data(path = DATA_PATH)
     
     #Identifying X and y
     target_data = df[TAGET_COL]
@@ -125,11 +125,27 @@ def my_flow(path:str):
     #find the best model
 
     ESTIMATOR=KNeighborsRegressor()
-    HYPERPARAMETERS = [{'n_neighbors':[i for i in range(1, 21)], 'p':[1, 2]}]
+    HYPERPARAMETERS = [{'n_neighbors':[i for i in range(1, 51)], 'p':[1, 2]}]
     
     regressor=find_best_model(X_train_transformed,train_test_dict['Y_TRAIN'],ESTIMATOR,HYPERPARAMETERS)
     print(regressor.best_params_)
-    print(regressor.score(X_test_transformed,train_test_dict['Y_TEST']))
+    print(regressor.best_score_)
 
     # run the my_flow function
-my_flow('./data/diamonds.csv')
+# my_flow('./data/diamonds.csv') 
+
+#we can run this if we want to run the file instantly
+
+# to schedule the flow
+from prefect.deployments import Deployment
+from prefect.orion.schemas.schedules import IntervalSchedule
+from datetime import timedelta
+
+deployment = Deployment.build_from_flow(            
+    flow = my_flow,                                           
+    name = "model_training",
+    schedule = IntervalSchedule(interval=timedelta(days=7)),
+    work_queue_name = "mlflow"
+)
+
+deployment.apply()
